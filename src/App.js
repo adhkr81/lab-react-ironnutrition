@@ -1,25 +1,60 @@
-import logo from './logo.svg';
 import './App.css';
+import foods from './foods.json';
+import {useState} from "react"
+
+import {FoodBox} from "./components/FoodBox"
+import {AddFoodForm} from "./components/AddFoodForm"
+import {Search} from "./components/Search"
+
 
 function App() {
+
+  const [ allFoods, setAllFood ] = useState(foods)
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    {/* <div>
+    {allFoods.map((currentElement) => {
+
+      return(
+        <div key={currentElement.name}>
+        <p>{currentElement.name}</p>
+        <img src={currentElement.image} width={200} />
+        </div>
+      )
+    })}
+    </div> */}
+
+    <div className="flexcontainer">
+        {allFoods.map((currentElement) => {
+
+          return(<FoodBox object={currentElement} key={currentElement.name}/>)
+    })}
+    </div>
+
+
+    <AddFoodForm allFoods={allFoods} setAllFood={setAllFood}/>
+
+
+    <Search allFoods={allFoods} setAllfood={setAllFood}/>
+
+
+
+
+  
+
     </div>
   );
 }
 
 export default App;
+
+
+// {
+//   "name": "Pizza",
+//   "calories": 400,
+//   "image": "https://i.imgur.com/eTmWoAN.png",
+//   "servings": 1
+// }
